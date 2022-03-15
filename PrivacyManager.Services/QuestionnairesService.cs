@@ -33,11 +33,11 @@ namespace PrivacyManager.Services
         }
         #endregion
 
-        public QuizzesSearch GetQuizzes(string searchTerm, int pageNo, int pageSize)
+        public PrivacyManagerSearch GetQuizzes(string searchTerm, int pageNo, int pageSize)
         {
             using (var context = new PrivacyManagerContext())
             {
-                var search = new QuizzesSearch();
+                var search = new PrivacyManagerSearch();
 
                 if (string.IsNullOrEmpty(searchTerm))
                 {
@@ -68,11 +68,11 @@ namespace PrivacyManager.Services
             }
         }
 
-        public QuizzesSearch GetQuizzesForHomePage(string searchTerm, int pageNo, int pageSize)
+        public PrivacyManagerSearch GetQuizzesForHomePage(string searchTerm, int pageNo, int pageSize)
         {
             using (var context = new PrivacyManagerContext())
             {
-                var search = new QuizzesSearch();
+                var search = new PrivacyManagerSearch();
 
                 if (string.IsNullOrEmpty(searchTerm))
                 {
@@ -138,11 +138,11 @@ namespace PrivacyManager.Services
             }
         }
 
-        public QuizzesSearch GetUserQuizzes(string userID, string searchTerm, int pageNo, int pageSize)
+        public PrivacyManagerSearch GetUserQuizzes(string userID, string searchTerm, int pageNo, int pageSize)
         {
             using (var context = new PrivacyManagerContext())
             {
-                var search = new QuizzesSearch();
+                var search = new PrivacyManagerSearch();
 
                 if (string.IsNullOrEmpty(searchTerm))
                 {
@@ -175,11 +175,11 @@ namespace PrivacyManager.Services
             }
         }
 
-        public QuizzesSearch GetQuizzesForAdmin(string searchTerm, int pageNo, int pageSize)
+        public PrivacyManagerSearch GetQuizzesForAdmin(string searchTerm, int pageNo, int pageSize)
         {
             using (var context = new PrivacyManagerContext())
             {
-                var search = new QuizzesSearch();
+                var search = new PrivacyManagerSearch();
 
                 if (string.IsNullOrEmpty(searchTerm))
                 {

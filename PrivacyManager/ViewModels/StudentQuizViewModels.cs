@@ -8,7 +8,7 @@ namespace PrivacyManager.ViewModels
 {
     public class StudentQuizViewModel : BaseViewModel
     {
-        public StudentQuiz StudentQuiz { get; set; }
+        public UserQuestionnaire StudentQuiz { get; set; }
 
         public bool TimerExpired { get; set; }
 
@@ -53,6 +53,6 @@ namespace PrivacyManager.ViewModels
     {
         public bool isPartialView { get; set; }
 
-        public List<StudentQuiz> StudentQuizzes { get; set; }
+        public List<UserQuestionnaire> StudentQuizzes { get; set; }
     }
 }

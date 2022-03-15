@@ -9,7 +9,7 @@ namespace PrivacyManager.Entities
     public class AttemptedQuestion : BaseEntity
     {
         public int? StudentQuizID { get; set; }
-        public virtual StudentQuiz StudentQuiz { get; set; }
+        public virtual UserQuestionnaire StudentQuiz { get; set; }
 
         public int QuestionID { get; set; }
         public virtual Question Question { get; set; }

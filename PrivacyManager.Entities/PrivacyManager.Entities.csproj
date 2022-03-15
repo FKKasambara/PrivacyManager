@@ -90,10 +90,10 @@
     <Compile Include="AttemptedQuestion.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="CustomEntities\QuestionsSearch.cs" />
-    <Compile Include="CustomEntities\QuizzesSearch.cs" />
+    <Compile Include="CustomEntities\PrivacyManagerSearch.cs" />
     <Compile Include="CustomEntities\RolesSearch.cs" />
     <Compile Include="CustomEntities\RoleWithUsersEntity.cs" />
-    <Compile Include="CustomEntities\StudentQuizzesSearch.cs" />
+    <Compile Include="CustomEntities\UsersPrivacyManagerSearch.cs" />
     <Compile Include="CustomEntities\UsersSearch.cs" />
     <Compile Include="CustomEntities\UserWithRoleEntity.cs" />
     <Compile Include="Image.cs" />
@@ -101,10 +101,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Quiz.cs" />
-    <Compile Include="QuizbeeUser.cs" />
+    <Compile Include="PrivacyManagerUser.cs" />
     <Compile Include="Survey.cs" />
     <Compile Include="QuizType.cs" />
-    <Compile Include="StudentQuiz.cs" />
+    <Compile Include="UserQuestionnaire.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -46,7 +46,7 @@ namespace PrivacyManager.Controllers
 
             if (quiz == null) return HttpNotFound();
 
-            StudentQuiz studentQuiz = new StudentQuiz();
+            UserQuestionnaire studentQuiz = new UserQuestionnaire();
 
             studentQuiz.StudentID = User.Identity.GetUserId();
             studentQuiz.QuizID = quiz.ID;

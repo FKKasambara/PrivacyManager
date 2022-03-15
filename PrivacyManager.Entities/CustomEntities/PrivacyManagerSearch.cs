@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PrivacyManager.Entities.CustomEntities
 {
-    public class StudentQuizzesSearch
+    public class PrivacyManagerSearch
     {
-        public List<StudentQuiz> StudentQuizzes { get; set; }
+        public List<Quiz> Quizzes { get; set; }
         public int TotalCount { get; set; }
     }
 }

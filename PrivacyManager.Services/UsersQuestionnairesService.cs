@@ -32,11 +32,11 @@ namespace PrivacyManager.Services
         {
         }
         #endregion
-        public StudentQuizzesSearch GetQuizAttempts(string searchTerm, int pageNo, int pageSize)
+        public UsersPrivacyManagerSearch GetQuizAttempts(string searchTerm, int pageNo, int pageSize)
         {
             using (var context = new PrivacyManagerContext())
             {
-                var search = new StudentQuizzesSearch();
+                var search = new UsersPrivacyManagerSearch();
 
                 if (string.IsNullOrEmpty(searchTerm))
                 {
@@ -75,11 +75,11 @@ namespace PrivacyManager.Services
             }
         }
 
-        public StudentQuizzesSearch GetUserQuizAttempts(string userID, string searchTerm, int pageNo, int pageSize)
+        public UsersPrivacyManagerSearch GetUserQuizAttempts(string userID, string searchTerm, int pageNo, int pageSize)
         {
             using (var context = new PrivacyManagerContext())
             {
-                var search = new StudentQuizzesSearch();
+                var search = new UsersPrivacyManagerSearch();
 
                 if (string.IsNullOrEmpty(searchTerm))
                 {
@@ -122,7 +122,7 @@ namespace PrivacyManager.Services
             }
         }
 
-        public StudentQuiz GetStudentQuiz(int ID)
+        public UserQuestionnaire GetStudentQuiz(int ID)
         {
             using (var context = new PrivacyManagerContext())
             {
@@ -141,7 +141,7 @@ namespace PrivacyManager.Services
             }
         }
 
-        public async Task<bool> NewStudentQuiz(StudentQuiz studentQuiz)
+        public async Task<bool> NewStudentQuiz(UserQuestionnaire studentQuiz)
         {
             using (var context = new PrivacyManagerContext())
             {
@@ -151,7 +151,7 @@ namespace PrivacyManager.Services
             }
         }
 
-        public async Task<bool> UpdateStudentQuiz(StudentQuiz studentQuiz)
+        public async Task<bool> UpdateStudentQuiz(UserQuestionnaire studentQuiz)
         {
             using (var context = new PrivacyManagerContext())
             {
