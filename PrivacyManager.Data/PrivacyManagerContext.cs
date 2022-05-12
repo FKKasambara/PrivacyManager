@@ -38,8 +38,10 @@ namespace PrivacyManager.Data
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }
-        public DbSet<UserQuestionnaire> StudentQuizzes { get; set; }
+        public DbSet<StudentQuiz> StudentQuizzes { get; set; }
         public DbSet<AttemptedQuestion> AttemptedQuestions { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<UploadFile> UploadFiles { get; set; }
+        public DbSet<AttemptedOptionFile> AttemptedOptionFiles { get; set; }
     }
 }

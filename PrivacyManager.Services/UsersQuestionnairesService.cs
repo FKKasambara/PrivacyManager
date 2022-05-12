@@ -122,7 +122,7 @@ namespace PrivacyManager.Services
             }
         }
 
-        public UserQuestionnaire GetStudentQuiz(int ID)
+        public StudentQuiz GetStudentQuiz(int ID)
         {
             using (var context = new PrivacyManagerContext())
             {
@@ -141,7 +141,7 @@ namespace PrivacyManager.Services
             }
         }
 
-        public async Task<bool> NewStudentQuiz(UserQuestionnaire studentQuiz)
+        public async Task<bool> NewStudentQuiz(StudentQuiz studentQuiz)
         {
             using (var context = new PrivacyManagerContext())
             {
@@ -151,7 +151,7 @@ namespace PrivacyManager.Services
             }
         }
 
-        public async Task<bool> UpdateStudentQuiz(UserQuestionnaire studentQuiz)
+        public async Task<bool> UpdateStudentQuiz(StudentQuiz studentQuiz)
         {
             using (var context = new PrivacyManagerContext())
             {
@@ -168,6 +168,17 @@ namespace PrivacyManager.Services
                 context.AttemptedQuestions.Add(attemptedQuestion);
 
                 return await context.SaveChangesAsync() > 0;
+            }
+        }
+
+        public async Task<int> UploadFile(UploadFile uploadFile)
+        {
+            using (var context = new PrivacyManagerContext())
+            {
+                context.UploadFiles.Add(uploadFile);
+                int id = uploadFile.ID;
+                await context.SaveChangesAsync();
+                return id;
             }
         }
     }

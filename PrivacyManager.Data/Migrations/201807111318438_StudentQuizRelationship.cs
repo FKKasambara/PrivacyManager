@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class StudentQuizRelationship : DbMigration
     {
         public override void Up()
@@ -15,7 +15,7 @@ namespace PrivacyManager.Data.Migrations
             AddForeignKey("dbo.StudentQuizs", "QuizID", "dbo.Quizs", "ID", cascadeDelete: true);
             DropColumn("dbo.Questions", "IsMCQ");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Questions", "IsMCQ", c => c.Boolean(nullable: false));

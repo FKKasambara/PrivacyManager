@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class SomeMigration : DbMigration
     {
         public override void Up()
@@ -14,7 +14,7 @@ namespace PrivacyManager.Data.Migrations
             AddForeignKey("dbo.Options", "AttemptedQuestion_ID", "dbo.AttemptedQuestions", "ID");
             DropColumn("dbo.AttemptedQuestions", "SelectedOption_ID");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.AttemptedQuestions", "SelectedOption_ID", c => c.Int());

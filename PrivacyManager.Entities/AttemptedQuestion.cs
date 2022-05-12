@@ -9,7 +9,7 @@ namespace PrivacyManager.Entities
     public class AttemptedQuestion : BaseEntity
     {
         public int? StudentQuizID { get; set; }
-        public virtual UserQuestionnaire StudentQuiz { get; set; }
+        public virtual StudentQuiz StudentQuiz { get; set; }
 
         public int QuestionID { get; set; }
         public virtual Question Question { get; set; }
@@ -21,5 +21,8 @@ namespace PrivacyManager.Entities
         public bool IsCorrect { get; set; }
 
         public decimal Score { get; set; }
+        public string UploadFileName { get; set; }
+        public string UploadFilePath { get; set; }
+
     }
 }

@@ -52,6 +52,6 @@ namespace PrivacyManager.ViewModels
 
     public class QuizAttemptsListViewModel : ListingBaseViewModel
     {
-        public List<UserQuestionnaire> StudentQuizzes { get; set; }
+        public List<StudentQuiz> StudentQuizzes { get; set; }
     }
 }

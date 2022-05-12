@@ -64,6 +64,7 @@
                                             </p>
                                         </div>
 
+                                        @*@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <i class="fas fa-stopwatch"></i>&nbsp;
@@ -104,12 +105,15 @@
                                                 Total Questions :
                                                 @quiz.Questions.Count
                                             </li>
-                                        </ul>
+                                        </ul> 
+                                         
+                                            *@
+                                   
                                         <div class="card-footer">
                                             <b class="text-muted">
                                                 <a href="@Url.AttemptQuiz(quiz.ID)" class="card-link">
                                                     <i class="fas fa-certificate "></i>&nbsp;
-                                                    Attend to Self-Assessment
+                                                    Start Self-Assessment
                                                 </a>
                                             </b>
                                         </div>

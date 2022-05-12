@@ -24,41 +24,48 @@
         <hr />
     </div>
 
-    @if (Model.Options.Where(o=>o.IsCorrect).Count() > 1)
+    @if (Model.Options.Where(o => o.IsCorrect).Count() > 1)
     {
         <p class="text-muted">
             Select all matching options.
         </p>
     }
+   
 
-    <div class="form-group">
-        @foreach (var option in Model.Options)
-        {
-            <div class="checkbox checkbox-success">
-                <input class="answer" type="checkbox" name="SelectedOptionID-@option.ID" value="@option.ID">
+<div class="form-group">
 
-                @if (!isImageQuestion)
-                {
-                    <label for="SelectedOptionID-@option.ID">
-                        @option.Answer
-                    </label>
-                }
-                else
-                {
-                    var imgSrc = option.Image != null ? string.Format("/Content/images/{0}", option.Image.Name) : string.Empty;
+   <p><em> If your option is yes or partially, please upload the supporting documents like policies, contracts, etc</em></p>
 
-                    <label for="SelectedOptionID-@option.ID">
-                        <img src="@imgSrc" class="img-thumbnail" style="height: 300px;">
-                    </label>
-                }
-            </div>
-        }
-    </div>
+    @foreach (var option in Model.Options)
+    {
+        <div class="checkbox checkbox-success">
+            <input class="answer" type="checkbox" name="SelectedOptionID-@option.ID" value="@option.ID">
+
+
+            @if (!isImageQuestion)
+            {
+                <label for="SelectedOptionID-@option.ID">
+                    @option.Answer
+                </label>
+            }
+            else
+            {
+                var imgSrc = option.Image != null ? string.Format("/Content/images/{0}", option.Image.Name) : string.Empty;
+
+                <label for="SelectedOptionID-@option.ID">
+                    <img src="@imgSrc" class="img-thumbnail" style="height: 300px;">
+                </label>
+            }
+        </div>
+    }
+    <input type="file" id="fileToUpload" name="fileToUpload" multiple><br><br>
+</div>
 
     <div id="actionsRow">
         <hr />
-        <button type="button" id="submitButton" class="btn btn-info waves-effect waves-light w-md"><i class="fas fa-check mg-r-10"></i>&nbsp;Submit Answer</button>
-        <button type="button" id="skipButton" class="btn btn-danger waves-effect waves-light w-md"><i class="fas fa-long-arrow-alt-right mg-r-10"></i>&nbsp;Skip</button>
+
+        <button type="button" id="submitButton" class="btn btn-info waves-effect waves-light w-md"><i class="fas fa-check mg-r-10"></i>&nbsp;Submit</button>
+        @*<button type="button" id="skipButton" class="btn btn-danger waves-effect waves-light w-md"><i class="fas fa-long-arrow-alt-right mg-r-10"></i>&nbsp;Skip</button>*@
     </div>
 </form>
 
@@ -111,6 +118,11 @@
         function SubmitAnswer() {
             $("#questionLoader").show();
 
+            var fileUpload = $("#fileToUpload").get(0);
+            var files = fileUpload.files;
+            var fileData = new FormData();
+            fileData.append(files[0].name, files[0]);
+
 			$.ajax({
                 type: "POST",
                 async: true,
@@ -120,6 +132,7 @@
                     QuizID: '@Model.QuizID',
                     QuestionID: '@Model.Question.ID',
                     QuestionIndex: '@Model.QuestionIndex',
+                    UploadTheFile: fileData.value,
                     SelectedOptionIDs: $('.answer:checkbox:checked').map(function () { return this.value; }).get().join(),
                     TimerExpired: $("#TimerExpired").val()
                 }

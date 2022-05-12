@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class OptionsAsImages : DbMigration
     {
         public override void Up()
@@ -11,7 +11,7 @@ namespace PrivacyManager.Data.Migrations
             CreateIndex("dbo.Options", "Image_ID");
             AddForeignKey("dbo.Options", "Image_ID", "dbo.Images", "ID");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Options", "Image_ID", "dbo.Images");

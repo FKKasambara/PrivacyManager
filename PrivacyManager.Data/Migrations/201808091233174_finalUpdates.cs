@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class finalUpdates : DbMigration
     {
         public override void Up()
@@ -13,7 +13,7 @@ namespace PrivacyManager.Data.Migrations
             RenameTable(name: "dbo.AspNetUserRoles", newName: "UserRoles");
             RenameTable(name: "dbo.AspNetRoles", newName: "Roles");
         }
-        
+
         public override void Down()
         {
             RenameTable(name: "dbo.Roles", newName: "AspNetRoles");

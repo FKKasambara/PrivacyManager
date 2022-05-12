@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrivacyManager.Entities
 {
-    public class UserQuestionnaire : BaseEntity
+    public class StudentQuiz : BaseEntity
     {
         public string StudentID { get; set; }
         public virtual PrivacyManagerUser Student { get; set; }

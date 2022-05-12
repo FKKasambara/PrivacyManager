@@ -54,10 +54,89 @@ namespace PrivacyManager.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Account/Login
+//**********************************************************************************//
+        // GET: Login - Integration
+        [HttpGet]
         [AllowAnonymous]
+
+        public ActionResult Login1(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;  
+          
+            return View("Login1", "_LayoutPage1Login", new LoginViewModel());//("Login1", "_LayoutEmpty", new Login1ViewModel());
+
+        }
+
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login1(LoginViewModel model, string returnUrl)
+        {
+            var db = new PrivacyManagerContext();
+            // PrivacyManager.Entities.CustomEntities.RoleWithUsersEntity db = new Entities.CustomEntities.RoleWithUsersEntity();
+            if (!ModelState.IsValid)
+            {
+                return View("Login1", "_LayoutPage1Login", model);
+            }
+            // ADD ROLE
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+            var user = db.Users.Where(x => x.UserName.Equals(model.Username)).FirstOrDefault();
+
+            if (user != null)
+            {
+                if (user.Id == null || user.Id == "b7fca6f1-9b48-4d57-a458-36c67ac6da53")
+                {
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid Username or Password.");
+                            return View("Login1");
+
+                    }
+                }
+                else
+                {
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal1(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View("Login1");
+                    }
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View("Login1", "_LayoutPage1Login", model);
+            }
+
+            }
+
+
+
+
+            //.************************************************************************************//
+            //
+            // GET: /Account/Login
+            [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -84,40 +163,46 @@ namespace PrivacyManager.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             var user = db.Users.Where(x=>x.UserName.Equals(model.Username)).FirstOrDefault();
-            
-            if (user.Id == "b7fca6f1-9b48-4d57-a458-36c67ac6da53")
+            if(user != null)
             {
-                switch (result)
+                if(user.Id == null || user.Id == "b7fca6f1-9b48-4d57-a458-36c67ac6da53")
+            {
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View("Login", "_LayoutEmpty", model);
+                    }
+                }
+            else
                 {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View("Login", "_LayoutEmpty", model);
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal1(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View("Login", "_LayoutEmpty", model);
+                    }
                 }
             }
             else
             {
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToLocal1(returnUrl);
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View("Login", "_LayoutEmpty", model);
-                }
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View("Login", "_LayoutEmpty", model);
             }
-            
         }
 
         //
@@ -168,7 +253,7 @@ namespace PrivacyManager.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View("Register", "_LayoutEmpty", new RegisterViewModel());
+            return View("Register", "_LayoutEmpty", new RegisterViewModel());  
         }
 
         //
@@ -188,12 +273,12 @@ namespace PrivacyManager.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login1", "Account");// ("Index", "Home"); 
                 }
                 AddErrors(result);
             }
 
-            return View("Register", "_LayoutEmpty", model);
+            return View("Register", "_LayoutEmpty", model); // ("Register", "_LayoutEmpty", model);
         }
 
         //
@@ -349,7 +434,7 @@ namespace PrivacyManager.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login1"); //Login
             }
 
             // Sign in the user with this external login provider if the user already has a login
@@ -418,7 +503,7 @@ namespace PrivacyManager.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction ("Login1", "Account"); //    ("Index", "Home"); ("Login1", "Account");
         }
 
         //

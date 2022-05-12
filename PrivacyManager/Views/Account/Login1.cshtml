@@ -1,0 +1,76 @@
+﻿@model PrivacyManager.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Login1";
+    Layout = "~/Views/Account/_LayoutPage1Login.cshtml";
+}
+
+@using (Html.BeginForm("Login1", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <section class="main">
+
+        <div class="bottom-grid">
+            <div class="logo">
+                <h1> <a href="index.html">Privacy Manager </a></h1>
+            </div>
+        </div>
+        <div class="content-w3ls">
+            <div class="text-center icon">
+
+                <span class="logo"><img src="~/Content/images/RSMStandardLogo.png" /> </span>
+            </div>
+
+            <div class="content-bottom">
+                <form action="Verify" method="post">
+                    <div class="field-group">
+                        <span class="fa fa-user" aria-hidden="true"></span>
+                        <div class="wthree-field">
+                            <input name="username" id="text1" type="text" value="" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <span class="fa fa-lock" aria-hidden="true"></span>
+                        <div class="wthree-field">
+                            <input name="password" id="myInput" type="Password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="wthree-field">
+                        <button type="submit" class="btn">Sign in</button>
+                    </div>
+                    <span>@Html.ValidationMessageFor(a => a.Password, "", new { @style = "color:White" })</span>
+                    <span>@Html.ValidationSummary(true, "", new { @style = "color:White" })</span>
+                    <ul class="list-login">
+                        
+                        <li class="switch-agileits">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                               Remember Me 
+                            </label>
+                        </li>
+                       
+                        <li class="clearfix"></li>
+                      </ul>
+
+                    <ul class="list-login-bottom">
+                        <li class="">
+                            <a href="@Url.Register()" class="">Create Account</a>
+                        </li>
+                        <li class="">
+                            <a href="" class="text-right">Need Help?</a>
+                        </li>
+                        <li class="clearfix"></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2022 RSM SA Consulting. All rights reserved </p>
+        </div>
+    </section>
+
+}
+<style>
+</style>

@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AttemptedOptions : DbMigration
     {
         public override void Up()
@@ -12,20 +12,20 @@ namespace PrivacyManager.Data.Migrations
             CreateTable(
                 "dbo.AttemptedOptions",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        AttemptedQuestionID = c.Int(nullable: false),
-                        OptionID = c.Int(nullable: false),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    AttemptedQuestionID = c.Int(nullable: false),
+                    OptionID = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Options", t => t.OptionID, cascadeDelete: true)
                 .ForeignKey("dbo.AttemptedQuestions", t => t.AttemptedQuestionID, cascadeDelete: true)
                 .Index(t => t.AttemptedQuestionID)
                 .Index(t => t.OptionID);
-            
+
             DropColumn("dbo.Options", "AttemptedQuestion_ID");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.Options", "AttemptedQuestion_ID", c => c.Int());

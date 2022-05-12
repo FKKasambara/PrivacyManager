@@ -5,6 +5,7 @@ using PrivacyManager.Services;
 using PrivacyManager.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,9 +14,11 @@ using System.Web.Mvc;
 
 namespace PrivacyManager.Controllers
 {
+  
     public class AttemptQuizController : BaseController
     {
         [HttpGet]
+        [Authorize]
         public ActionResult Attempt(int QuizID)
         {
             var quiz = QuizzesService.Instance.GetQuiz(QuizID);
@@ -40,13 +43,13 @@ namespace PrivacyManager.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Attempt(AttemptQuizViewModel model)
+        public async Task<ActionResult> Attempt(AttemptQuizViewModel model, HttpPostedFileBase file)
         {
             var quiz = QuizzesService.Instance.GetQuiz(model.QuizID);
 
             if (quiz == null) return HttpNotFound();
 
-            UserQuestionnaire studentQuiz = new UserQuestionnaire();
+            StudentQuiz studentQuiz = new StudentQuiz();
 
             studentQuiz.StudentID = User.Identity.GetUserId();
             studentQuiz.QuizID = quiz.ID;
@@ -123,6 +126,11 @@ namespace PrivacyManager.Controllers
                 attemptedQuestion.Score = Calculator.CalculateAttemptedQuestionScore(question.Options, attemptedQuestion.SelectedOptions);
                 attemptedQuestion.AnsweredAt = DateTime.Now;
                 attemptedQuestion.ModifiedOn = DateTime.Now;
+                if(model.UploadFile != null )
+                {
+                    attemptedQuestion.UploadFileName = Path.GetFileName(model.UploadFile.FileName);
+                    attemptedQuestion.UploadFilePath = Path.Combine(Server.MapPath("~/UploadedFiles/" + studentQuiz.Quiz.Name), attemptedQuestion.UploadFileName); ;
+                }
 
                 if (await UsersQuestionnairesService.Instance.NewAttemptedQuestion(attemptedQuestion))
                 {
@@ -234,6 +242,32 @@ namespace PrivacyManager.Controllers
             model.StudentQuiz = studentQuiz;
 
             return PartialView("_PrintResult", model);
+        }
+
+        [HttpGet]
+        public ActionResult UploadFile()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase file)
+        {
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                    file.SaveAs(_path);
+                }
+                ViewBag.Message = "File Uploaded Successfully!!";
+                return View();
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return View();
+            }
         }
     }
 }

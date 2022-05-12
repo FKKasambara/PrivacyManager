@@ -33,6 +33,8 @@ namespace PrivacyManager.ViewModels
 
         public bool TimerExpired { get; set; }
 
+        public HttpPostedFileBase UploadFile { get; set; }
+
         public int TotalQuestions { get; set; }
         public int QuestionIndex { get; set; }
 

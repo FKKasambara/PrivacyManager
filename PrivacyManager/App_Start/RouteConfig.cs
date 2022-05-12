@@ -32,11 +32,20 @@ namespace PrivacyManager
             );
 
             routes.MapRoute(
-                name: "Login",
+               name: "Login",
                 url: "login/",
                 defaults: new { controller = "Account", action = "Login" }
             );
 
+
+            // Login-Page 1
+            routes.MapRoute(
+                name: "Login1", //Login1
+                url: "login1",
+                defaults: new { controller = "Account", action = "Login1" }
+            );
+
+             
             routes.MapRoute(
                 name: "Logout",
                 url: "logout/",
@@ -141,13 +150,13 @@ namespace PrivacyManager
 
             routes.MapRoute(
                 name: "AttemptDetails",
-                url: "assessment-score/{studentQuizID}", //quiz-result
+                url: "questionnaire-results/{studentQuizID}", //quiz-result
                 defaults: new { controller = "AttemptQuiz", action = "AttemptDetails" }
             );
 
             routes.MapRoute(
                 name: "PrintResult",
-                url: "assessment-score/print/{studentQuizID}", //quiz-result
+                url: "questionnaire-result/print/{studentQuizID}", //quiz-result
                 defaults: new { controller = "AttemptQuiz", action = "PrintResult" }
             );
 
@@ -248,7 +257,7 @@ namespace PrivacyManager
             );
 
             routes.MapRoute(
-                name: "Default",
+                name: "Default", //Questionnaires
                 url: "{controller}/{action}/{id}/",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );

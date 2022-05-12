@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Images : DbMigration
     {
         public override void Up()
@@ -10,18 +10,18 @@ namespace PrivacyManager.Data.Migrations
             CreateTable(
                 "dbo.Images",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        ModifiedOn = c.DateTime(),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    ModifiedOn = c.DateTime(),
+                })
                 .PrimaryKey(t => t.ID);
-            
+
             AddColumn("dbo.Questions", "Image_ID", c => c.Int());
             CreateIndex("dbo.Questions", "Image_ID");
             AddForeignKey("dbo.Questions", "Image_ID", "dbo.Images", "ID");
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Questions", "Image_ID", "dbo.Images");

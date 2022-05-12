@@ -1,11 +1,6 @@
-namespace PrivacyManager.Data.Migrations
+﻿namespace PrivacyManager.Data.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using PrivacyManager.Entities;
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -13,14 +8,15 @@ namespace PrivacyManager.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "PrivacyManager.Data.PrivacyManagerContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(PrivacyManager.Data.PrivacyManagerContext context)
         {
             //  This method will be called after migrating to the latest version.
-        }
 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace PrivacyManager.Entities.CustomEntities
 {
     public class UsersPrivacyManagerSearch
     {
-        public List<UserQuestionnaire> StudentQuizzes { get; set; }
+        public List<StudentQuiz> StudentQuizzes { get; set; }
         public int TotalCount { get; set; }
     }
 }

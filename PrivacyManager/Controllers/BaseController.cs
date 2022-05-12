@@ -13,10 +13,10 @@ namespace PrivacyManager.Controllers
         protected override void OnException(ExceptionContext filterContext)
         {
             Exception ex = filterContext.Exception;
-            
-            #if DEBUG
+
+#if DEBUG
             throw ex;
-            #endif
+#endif
 
             //Log Exception e
             filterContext.ExceptionHandled = true;

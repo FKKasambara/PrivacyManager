@@ -2,7 +2,7 @@ namespace PrivacyManager.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class firstInitMigration : DbMigration
     {
         public override void Up()
@@ -12,7 +12,7 @@ namespace PrivacyManager.Data.Migrations
             DropColumn("dbo.Quizs", "IsActive");
             DropColumn("dbo.StudentQuizs", "IsActive");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.StudentQuizs", "IsActive", c => c.Boolean(nullable: false));
